@@ -15,16 +15,17 @@ def has_ping(host):
 
 
 def main():
-    logfile = open("logfile.txt", "a")
     times_missed = 0
 
     while 1:
+        logfile = open("logfile.txt", "a")
         missing_link = False
 
-        if has_ping("8.8.8.9") or has_ping("www.vg.nop"):
+        if has_ping("8.8.8.8") or has_ping("www.vg.no"):
             missing_link = False
             times_missed = 0
             logfile.write("(*) - Link active - " + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + "\n")
+            logfile.close()
 
         else:
             missing_link = True
@@ -32,9 +33,11 @@ def main():
             logfile.write(
                 "(*) - Link missing! - Missed contact: " + str(times_missed) + " - " + datetime.datetime.now().strftime(
                     '%Y-%m-%d %H:%M:%S') + "\n")
+            logfile.close()
 
         if missing_link and times_missed == 3:
             logfile.write("(!) Shutdown initiated - " + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + "\n")
+            logfile.close()
             system("sudo shutdown")
 
         time.sleep(300)
