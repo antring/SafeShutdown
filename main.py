@@ -2,6 +2,7 @@ from subprocess import check_output
 from os import system
 
 import time
+import datetime
 
 
 def has_ping(host):
@@ -14,22 +15,26 @@ def has_ping(host):
 
 
 def main():
+    logfile = open("logfile.txt", "a")
     times_missed = 0
 
     while 1:
-        missing_link = True
+        missing_link = False
 
-        if has_ping("8.8.8.8") or has_ping("www.vg.no"):
+        if has_ping("8.8.8.9") or has_ping("www.vg.nop"):
             missing_link = False
             times_missed = 0
-            print("has_link")
+            logfile.write("(*) - Link active - " + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + "\n")
 
         else:
             missing_link = True
             times_missed += 1
-            print("missing_link")
+            logfile.write(
+                "(*) - Link missing! - Missed contact: " + str(times_missed) + " - " + datetime.datetime.now().strftime(
+                    '%Y-%m-%d %H:%M:%S') + "\n")
 
         if missing_link and times_missed == 3:
+            logfile.write("(!) Shutdown initiated - " + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + "\n")
             system("sudo shutdown")
 
         time.sleep(300)
