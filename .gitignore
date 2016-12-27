@@ -87,3 +87,10 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+#Stuff
+logfile.txt
+notes.txt
+test.py
+.idea
+config.ini
