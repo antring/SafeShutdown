@@ -46,7 +46,7 @@ def task(conf, tmh):
 
     if has_ping(conf.config['Hosts']['Primary']) or has_ping(conf.config['Hosts']['Secondary']):
         missing_link = False
-        times_missed = 0
+        tmh.times_missed = 0
 
         print("(*) - Link active - " + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         logfile.write("(*) - Link active - " + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + "\n")
