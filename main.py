@@ -12,8 +12,8 @@ class ConfigReader:
     def __init__(self):
         self.config = configparser.ConfigParser()
 
-        self.config['Misc'] = {'Delay in seconds': '', 'Number of dropped packets': ''}
-        self.config['Hosts'] = {'Primary': '', 'Secondary': ''}
+        self.config['Misc'] = {'Delay in seconds': '10', 'Number of dropped packets': '5'}
+        self.config['Hosts'] = {'Primary': '8.8.8.8', 'Secondary': ''}
 
         if not os.path.exists("config.ini"):
             with open('config.ini', 'w') as configfile:
